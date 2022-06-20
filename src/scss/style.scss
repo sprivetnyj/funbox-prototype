@@ -1,0 +1,86 @@
+// ВОЗМОЖНОСТИ SCSS ==============================================================
+
+// Математические функции
+@use "sass:math";
+
+// Миксины
+@import "./modules/mixins";
+
+// ШРИФТЫ ========================================================================
+@import "fonts";
+
+$fontFamily: "TrebuchetMS";
+$fontSize: rem(16);
+$lineHeight: math.div(18, 16);
+
+// ЦВЕТА =========================================================================
+:root {
+	--color-black: #000;
+	--color-gray: #666;
+	--color-gray-light: #b3b3b3;
+	--color-white: #fff;
+	--color-blue: #1698d9;
+	--color-blue-light: #2ea8e6;
+	--color-pink: #d91667;
+	--color-pink-light: #e52e7a;
+	--color-yellow: #ffff66;
+}
+
+// КОНТЕЙНЕР =====================================================================
+$minWidth: 320;
+$maxWidthContainer: 1120;
+$containerPadding: 30;
+$containerWidth: $maxWidthContainer + $containerPadding - 0.02;
+
+// БРЕЙКПОИНТЫ ===================================================================
+$pc: em($containerWidth);
+$tablet: em(991.98);
+$mobile: em(767.98);
+$mobileSmall: em(479.98);
+
+// ОБНУЛЕНИЕ И БАЗОВЫЕ СТИЛИ =====================================================
+@import "./modules/null";
+
+body {
+	position: relative;
+	background-image: url("../img/bg-pattern.jpg");
+	background-position: center;
+}
+
+[class*="__container"] {
+	max-width: rem($maxWidthContainer);
+	box-sizing: content-box;
+	margin: 0 auto;
+	padding: 0 rem(math.div($containerPadding, 2));
+}
+
+// ОБЩИЕ СТИЛИ ===================================================================
+@import "common";
+
+// СТРАНИЦЫ ======================================================================
+@import "home";
+
+// PAGE ЭЛЕМЕНТЫ =================================================================
+
+.page {
+	position: relative;
+	min-height: 100vh;
+	display: flex;
+	justify-content: center;
+	align-items: center;
+	&::before {
+		content: "";
+		position: absolute;
+		z-index: -1;
+		top: 0;
+		left: 0;
+		width: 100%;
+		height: 100%;
+		background: linear-gradient(180deg, rgba(0, 0, 0, 0.5) 0%, rgba(0, 0, 0, 5e-5) 49.88%, rgba(0, 0, 0, 0.5) 100%);
+	}
+	// .page__products
+	&__products {
+		width: 100%;
+		padding: rem(60) 0;
+	}
+}

@@ -1,0 +1,183 @@
+//================================================================================
+.products {
+	// .products__title
+	&__title {
+		font-family: "Exo2.0";
+		color: var(--color-white);
+		text-align: center;
+		font-size: rem(36);
+		line-height: math.div(43, 36);
+		margin-bottom: rem(25);
+	}
+	// .products__body
+	&__body {
+		display: grid;
+		gap: rem(80);
+		grid-template-columns: repeat(auto-fit, minmax(rem(280), 1fr));
+		@media (max-width: $pc) {
+			gap: rem(60);
+		}
+		@media (max-width: $mobile) {
+			gap: rem(30);
+		}
+	}
+}
+.product {
+	display: grid;
+	grid-template-rows: 1fr auto;
+	// .product__card
+	&__card {
+		cursor: pointer;
+		position: relative;
+		z-index: 1;
+		min-height: rem(480);
+		margin-bottom: rem(14);
+		padding: rem(21) rem(59) rem(15) rem(48);
+		border-radius: rem(12);
+		border: 4px solid var(--color-blue);
+		background-color: var(--color-white);
+		clip-path: polygon(43px 1px, 100% 0, 100% 100%, 0 100%, 0 43px);
+		&::before {
+			content: "";
+			position: absolute;
+			top: -57px;
+			left: -57px;
+			width: rem(90);
+			height: rem(90);
+			border: 4px solid var(--color-blue);
+			transform: rotate(-45deg);
+			background-color: var(--color-white);
+		}
+		&::after {
+			content: "";
+			position: absolute;
+			top: 0;
+			left: 0;
+			width: 100%;
+			height: 100%;
+			border-radius: rem(12);
+			background-image: url("../img/cat.png");
+			background-position: bottom rem(-90) left rem(-29);
+			background-repeat: no-repeat;
+		}
+		@media (max-width: $pc) {
+			padding: rem(30);
+		}
+	}
+	// .product__desc
+	&__desc {
+		color: var(--color-gray);
+		margin-bottom: em(5, 16);
+		&.hover {
+			color: var(--color-pink-light);
+		}
+	}
+	// .product__name
+	&__name {
+		font-weight: 700;
+		font-size: rem(24);
+		line-height: math.div(27, 24);
+		margin-bottom: rem(15);
+		span:not(.product__filling) {
+			font-size: rem(48);
+			line-height: math.div(55, 48);
+		}
+	}
+	// .product__info
+	&__info {
+		color: var(--color-gray);
+		font-size: rem(14);
+		line-height: math.div(16, 14);
+	}
+	// .product__weight
+	&__weight {
+		position: absolute;
+		z-index: 1;
+		bottom: rem(16);
+		right: rem(16);
+		width: rem(80);
+		height: rem(80);
+		border-radius: 50%;
+		display: flex;
+		justify-content: center;
+		align-items: center;
+		flex-direction: column;
+		color: var(--color-white);
+		background-color: var(--color-blue);
+		span {
+			color: inherit !important;
+			font-size: rem(42);
+			line-height: math.div(38, 42);
+		}
+		font-size: rem(21);
+	}
+	// .product__bottom
+	&__bottom {
+		color: var(--color-white);
+		text-align: center;
+		font-size: rem(13);
+		height: rem(16);
+		line-height: math.div(15, 13);
+		button {
+			cursor: pointer;
+			color: var(--color-blue);
+			font-weight: 700;
+			text-decoration: underline dashed;
+		}
+	}
+	&--selected {
+		.product__card,
+		.product__card::before {
+			border-color: var(--color-pink);
+		}
+		.product__bottom .product__weight {
+			background-color: var(--color-pink);
+		}
+		.product__weight {
+			background-color: var(--color-pink);
+		}
+	}
+	&--disabled {
+		.product__card {
+			cursor: not-allowed;
+			&::after {
+				opacity: 0.5;
+			}
+		}
+		.product__card,
+		.product__card::before {
+			border-color: var(--color-gray-light);
+		}
+		.product__weight {
+			background-color: var(--color-gray-light);
+		}
+		*:not(.product__weight) {
+			color: var(--color-gray-light);
+		}
+		.product__bottom {
+			color: var(--color-yellow);
+		}
+	}
+	@media (any-hover: hover) {
+		&:hover {
+			--color-style: var(--color-gray-light);
+			&:not(.product--disabled, .product--selected) {
+				--color-style: var(--color-blue-light);
+			}
+			&.product--selected {
+				--color-style: var(--color-pink-light);
+			}
+			.product__card,
+			.product__card::before {
+				border-color: var(--color-style);
+			}
+			.product__weight {
+				background-color: var(--color-style);
+			}
+			.product__bottom button {
+				color: var(--color-style);
+			}
+		}
+	}
+}
+//================================================================================
